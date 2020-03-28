@@ -1,14 +1,16 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "target": "es5",
-    "noEmit": true,
-    "declaration": true,
-    "outDir": "dist",
-    "sourceMap": true,
-    "strict": true
-  },
-  "exclude": [
-    "node_modules"
-  ]
+	"compilerOptions": {
+		"module": "commonjs",
+		"target": "es5",
+		"declaration": true,
+		"outDir": "dist",
+		"sourceMap": true,
+		"strict": true
+	},
+	"include": [
+		"src/**/*.ts"
+	],
+	"exclude": [
+		"node_modules"
+	]
 }

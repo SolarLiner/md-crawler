@@ -1,18 +1,16 @@
 {
   "name": "md-crawler",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/index.js",
   "source": "src/index.ts",
   "types": "dist/src/index.d.ts",
   "license": "MIT",
   "scripts": {
-    "build": "concurrently yarn:build:*",
-    "build:js": "parcel build src/index.ts --target node",
-    "build:dts": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json",
     "test": "ava-ts",
     "test:watch": "ava-ts -w",
     "example": "ts-node example/index.ts",
-    "prepack": "concurrently npm:build:*"
+    "prepack": "tsc -p tsconfig.json"
   },
   "dependencies": {
     "fp-ts": "^2.5.3",
@@ -23,10 +21,7 @@
     "@types/node": "^13.9.5",
     "ava": "^3.5.1",
     "ava-ts": "^0.25.2",
-    "builtin-modules": "^3.1.0",
-    "concurrently": "^5.1.0",
     "io-ts": "^2.1.2",
-    "parcel": "^1.12.4",
     "ts-node": "^8.8.1",
     "typescript": "^3.8.3"
   },
