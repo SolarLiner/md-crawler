@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "ESNext",
+    "target": "es5",
+    "noEmit": true,
+    "declaration": true,
+    "outDir": "dist",
     "sourceMap": true,
     "strict": true
   },
