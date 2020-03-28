@@ -11,7 +11,8 @@
     "build:dts": "tsc -p tsconfig.json",
     "test": "ava-ts",
     "test:watch": "ava-ts -w",
-    "example": "ts-node example/index.ts"
+    "example": "ts-node example/index.ts",
+    "prepack": "concurrently npm:build:*"
   },
   "dependencies": {
     "fp-ts": "^2.5.3",
