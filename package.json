@@ -1,0 +1,34 @@
+{
+  "name": "md-crawler",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "unpkg": "dist/index.umd.js",
+  "module": "dist/index.module.js",
+  "source": "src/index.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "microbundle",
+    "test": "ava-ts",
+    "test:watch": "ava-ts -w",
+    "example": "ts-node example/index.ts"
+  },
+  "dependencies": {
+    "fp-ts": "^2.5.3",
+    "js-yaml": "^3.13.1"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^3.12.3",
+    "@types/node": "^13.9.5",
+    "ava": "^3.5.1",
+    "ava-ts": "^0.25.2",
+    "microbundle": "^0.11.0",
+    "ts-node": "^8.8.1",
+    "typescript": "^3.8.3",
+    "io-ts": "^2.1.2"
+  },
+  "ava": {
+    "files": [
+      "test/**/*"
+    ]
+  }
+}
