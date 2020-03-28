@@ -5,6 +5,10 @@
   "source": "src/index.ts",
   "types": "dist/index.d.ts",
   "license": "MIT",
+  "files": [
+    "dist/*",
+    "example/**/*"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "ava-ts",
