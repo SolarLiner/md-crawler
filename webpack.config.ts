@@ -1,11 +1,13 @@
 import {Configuration, ProgressPlugin} from "webpack";
-import { join } from "path";
+import * as nodeExternals from "webpack-node-externals";
+import {join} from "path";
 
 const config: Configuration = {
 	name: "bundler",
 	mode: "production",
 	entry: "./src/index.ts",
 	target: "node",
+	externals: [nodeExternals()],
 	output: {
 		library: "md-crawler",
 		libraryTarget: "commonjs2",
@@ -31,5 +33,5 @@ const config: Configuration = {
 	plugins: [
 		new ProgressPlugin()
 	]
-}
+};
 export default config;
