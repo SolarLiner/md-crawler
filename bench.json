@@ -1,0 +1,10 @@
+{
+  "suites": {
+    "Crawl benchmark": {
+      "tests": {
+        "crawl": 1025.0854127971506
+      }
+    }
+  },
+  "timestamp": 1585571147904
+}
