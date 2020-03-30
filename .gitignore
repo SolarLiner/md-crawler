@@ -184,3 +184,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Benchmark results
+bench.json
