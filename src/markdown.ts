@@ -1,28 +1,35 @@
-import Frontmatter from "./frontmatter";
-import {safeLoad} from "js-yaml";
+import { Frontmatter, read } from "./frontmatter";
+import { safeLoad as _rawSafeLoad } from "js-yaml";
+import { none, option, Option, some } from "fp-ts/lib/Option";
+import { flow } from "fp-ts/lib/function";
 
 export interface Validator<T> {
-  (data: any): T
+  (data: object): Option<T>
 }
 
 export type MarkdownFile<T> = { filename: string } & MarkdownData<T>;
 export type MarkdownData<T> = T & { contents: string };
 
-export async function loadMD<T>(fpath: string, validator: Validator<T>): Promise<MarkdownFile<T>> {
-  return {
-    ...doValidation(await Frontmatter.load(fpath), validator),
-    filename: fpath,
-  };
+function safeLoad(s: string): Option<object> {
+  try {
+    return some(_rawSafeLoad(s));
+  } catch {
+    return none;
+  }
 }
 
-export function parseMD<T>(contents: string, validator: Validator<T>): MarkdownData<T> {
-  return doValidation(Frontmatter.parse(contents), validator);
-}
+const validate = <T>(validator: Validator<T>) => ({ contents, frontmatter }: Frontmatter<string>): Option<Frontmatter<T>> =>
+  option.map(
+    option.chain(
+      safeLoad(frontmatter),
+      validator
+    ),
+    frontmatter => ({ contents, frontmatter })
+  );
+export const readMarkdown = <T>(validator: Validator<T>) => (filename: string, encoding?: string): Option<MarkdownFile<T>> =>
+  option.map(
+    validate(validator)(read(filename, encoding)),
+    flow(toMarkdownData, m => ({ ...m, filename }))
+  );
 
-export function doValidation<T>(f: Frontmatter<string>, validator: Validator<T>): MarkdownData<T> {
-  const validated = f.map(safeLoad).map(validator);
-  return {
-    ...validated.frontmatter,
-    contents: validated.contents
-  };
-}
+const toMarkdownData = <T>(fm: Frontmatter<T>): MarkdownData<T> => ({ ...fm.frontmatter, contents: fm.contents });
